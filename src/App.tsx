@@ -3,7 +3,7 @@ import './App.css'
 
 function App() {
   const [messages, setMessages] = useState(["Hi there","Hello,How are you"]);
-  //const inputRef=useRef(null);
+  const inputRef=useRef(null);
   const wsRef = useRef<WebSocket | null>(null);
 
   useEffect(()=>{
@@ -38,11 +38,10 @@ function App() {
         )}
       </div>
       <div className='w-full bg-white'>
-        <input id="message" className='text p-4 rounded-sm w-[90vw]'></input>
+        <input ref={inputRef} className='text p-4 rounded-sm w-[90vw]'></input>
         <button onClick={()=>{
           //@ts-ignore
-          //const message=inputRef.current.value;
-          const message=document.getElementById("message").value
+          const message=inputRef.current.value;
           //@ts-ignore
           wsRef.current.send(JSON.stringify({
             type:"chat",
